@@ -12,10 +12,10 @@ use ICAP\ReferenceBundle\Entity\Reference;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/test", name="icap_reference")
+     * @Route("/new", name="icap_reference_new")
      * @Template()
      */
-    public function indexAction()
+    public function newAction()
     {
         $form = $this->createForm($this->get('icap_reference.choose_type'));
         //var_dump($this->container->getParameter('referencesConfiguration'));
@@ -24,21 +24,13 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/list")
+     * @Route("/", name="icap_reference_list")
      * @Template()
      */
     public function listAction()
     {
-        return array();
-    }
-
-    /**
-     * @Route("/new")
-     * @Template()
-     */
-    public function newAction()
-    {
-        return array();
+        $references = $this->container->get('icap_reference.manager')->getReferenceList();
+        return array('references' => $references);
     }
 
     /**
@@ -92,7 +84,7 @@ class DefaultController extends Controller
             $em->persist($reference);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('icap_reference'));
+            return $this->redirect($this->generateUrl('icap_reference_new'));
         }
 
         return array(
@@ -101,3 +93,4 @@ class DefaultController extends Controller
         );
     }
 }
+ 

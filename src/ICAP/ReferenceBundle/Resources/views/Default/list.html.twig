@@ -1,13 +1,15 @@
 {% extends "ICAPReferenceBundle::base.html.twig" %}
 
     {% block toolbar %}
-    	<input type="button" class="spiral-button blue" id="new_button" value="Create new reference" />
+    	<a href="{{ path('icap_reference_new') }}" class="spiral-button blue">Create new reference</a>
     {% endblock %}
 
 	{% block content %}
 		<div class="reference_list">
 
-			{% for i in 0..10 %}
+			{% if references %}
+
+			{% for reference in references %}
 
 			<div class="reference_box">
 				<div style="float:left;height:120px;"><input type="checkbox" /></div>
@@ -15,7 +17,7 @@
 					<img src="{{ asset('bundles/icapreference/images/disc.png') }}" width="120" />
 				</div>
 				<div style="float:left;padding: 10px;">
-					<a class="reference_title" href="./view?id=99">Justin Bieber</a><br/>
+					<a class="reference_title" href="#">{{ reference.title }}</a><br/>
 					<span class="subtitle">I've just got hair on my d***</span><br/>
 					<span>1666</span> - <span>myMajorCompany</span><br />
 					<a class="reference_link" href="#">http://thisisabigjook/justin.com</a>
@@ -25,6 +27,12 @@
 			</div>
 
 			{% endfor %}
+
+			{% else %}
+
+			no reference yet!
+
+			{% endif %}
 
 		</div>
 	{% endblock %}
