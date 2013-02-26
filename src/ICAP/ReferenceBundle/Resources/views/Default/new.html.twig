@@ -1,4 +1,31 @@
-<form method="POST" action="{{ path("icap_reference_choose_type") }}">
-    {{ form_widget(form) }}
-    <input type="submit" value="submit"/>
-</form>
+{% extends "ICAPReferenceBundle::base.html.twig" %}
+
+    {% block toolbar %}
+    	<a href="#" class="spiral-button green">Save</a>
+    	<a href="#" class="spiral-button grey" id="cancel_button">&laquo; Back to list</a>
+    {% endblock %}
+
+	{% block content %}
+		<div class="reference_new">
+
+			<div class="reference_box">
+				<div style="float:left; border: #eee 1px solid;">
+					<img src="{{ asset('bundles/icapreference/images/disc.png') }}" width="120" />
+				</div>
+				<div style="float:left;padding: 10px;">
+		
+
+				<form method="POST" action="{{ path("icap_reference_choose_type") }}">
+				    {{ form_widget(form) }}
+				    <input type="submit" value="submit"/>
+				</form>
+
+
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+
+		</div>
+	{% endblock %}
+
+
