@@ -15,7 +15,8 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $form = $this->createForm(new ReferenceType());
+        $form = $this->get('icap_reference.form_manager')->getForm();
+        //var_dump($this->container->getParameter('referencesConfiguration'));
 
         return array('form' => $form->createView());
     }

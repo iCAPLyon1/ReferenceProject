@@ -1,0 +1,9 @@
+icap_reference:
+    types:
+        bibliography:
+            label: bibliography
+            service: icap_reference.bibliography
+
+        filmography:
+            label: filmography
+            service: icap_reference.filmography

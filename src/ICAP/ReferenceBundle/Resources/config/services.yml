@@ -1,4 +1,12 @@
 services:
-    #idci_exporter.manager:
-    #    class: IDCI\Bundle\ExporterBundle\Service\Manager
-    #    arguments: [@service_container]
+    icap_reference.form_manager: 
+        class: ICAP\ReferenceBundle\Service\FormManager
+        arguments: [@service_container]
+
+    icap_reference.form_type:
+        class: ICAP\ReferenceBundle\Form\ReferenceType
+        arguments: [@service_container]
+
+    icap_reference.bibliography: 
+        class: ICAP\ReferenceBundle\Service\Reference\Bibliography
+        arguments: [@service_container]
