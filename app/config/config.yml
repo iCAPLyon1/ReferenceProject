@@ -59,9 +59,3 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-icap_reference:
-    types:
-        discography:
-            label: discography
-            service: icap_reference.discography
