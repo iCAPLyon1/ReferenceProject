@@ -10,15 +10,19 @@ TODO
 2) Create your own reference type
 -------------------------------------
 
-In config.yml (app/config/config.yml or yourVendor/yourBundle/config/config.yml) create a
+In config.yml (app/config/config.yml or yourVendor/yourBundle/config/config.yml) create a:
+
+``` yaml
     icap_reference:
         types:
             your_reference_type:
                 label: the name of your humanly understandable
                 service: the_service_corresponding_to_your_type
+```
 
 Then create a class inherit from AbstractType
-    
+
+``` php   
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\Form\AbstractType;
 
@@ -39,12 +43,16 @@ Then create a class inherit from AbstractType
             return 'the_service_corresponding_to_your_type';
         }
     }
+```
 
-Then open services.yml (app/config/services.yml or yourVendor/yourBundle/config/services.yml) create a 
+Then open services.yml (app/config/services.yml or yourVendor/yourBundle/config/services.yml) create a :
+
+``` yaml
     a_service_name_of_your_choice: 
         class: YourVendor\YourBundle\Path\To\Your\Type
         arguments: []
         tags:
             - { name: form.type, alias: the_service_corresponding_to_your_type }
+```
 
 That's all folks !
