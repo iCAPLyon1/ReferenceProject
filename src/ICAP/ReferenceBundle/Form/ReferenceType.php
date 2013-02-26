@@ -25,7 +25,8 @@ class ReferenceType extends AbstractType
         //key: serviceName
         //value: label 
         $referenceTypes = array();
-        $types = $this->getContainer()->getParameter('referencesConfiguration')['types'];
+        $configuration = $this->getContainer()->getParameter('referencesConfiguration');
+        $types = $configuration['types'];
         foreach ($types as $type => $typeConfig) {
             $referenceTypes[$typeConfig['service']] = $typeConfig['label'];
         }
