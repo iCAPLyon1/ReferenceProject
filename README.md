@@ -26,7 +26,7 @@ Then create a class inherit from AbstractType
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\Form\AbstractType;
 
-    class DefaultType extends AbstractType
+    class YourReferenceType extends AbstractType
     {
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
