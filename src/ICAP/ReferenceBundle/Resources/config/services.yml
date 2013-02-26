@@ -1,4 +1,8 @@
 services:
+    icap_reference.manager: 
+        class: ICAP\ReferenceBundle\Service\Manager
+        arguments: [@service_container]
+
     icap_reference.form_manager: 
         class: ICAP\ReferenceBundle\Service\FormManager
         arguments: [@service_container]
