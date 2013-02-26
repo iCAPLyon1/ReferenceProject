@@ -1,9 +1,17 @@
 icap_reference:
     types:
+        default:
+            label: other
+            service: default
+
         bibliography:
             label: bibliography
-            service: icap_reference.bibliography
+            service: bibliography
 
         filmography:
             label: filmography
-            service: icap_reference.filmography
+            service: filmography
+
+        discography:
+            label: discography
+            service: discography

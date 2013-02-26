@@ -2,7 +2,7 @@
 
 namespace ICAP\ReferenceBundle\Service;
 
-use ICAP\ReferenceBundle\Form;
+use ICAP\ReferenceBundle\Form\Reference\ReferenceType;
 
 class FormManager
 {
@@ -23,8 +23,25 @@ class FormManager
         return $this->getContainer()->get('form.factory');
     }
 
-    public function getForm($serviceName = 'icap_reference.form_type')
+    public function getReferencesConfiguration()
     {
-        return $this->getFormFactory()->create($this->getContainer()->get($serviceName)); 
+        return $this->getContainer()->getParameter('referencesConfiguration');
+    }
+
+    public function getForm($type, $reference = null)
+    {
+        return $this->getFormFactory()->create(
+            new ReferenceType(),
+            $reference,
+            array('dataType' => $this->getServiceName($type))
+        ); 
+    }
+
+    public function getServiceName($type)
+    {
+        $referencesConfiguration = $this->getReferencesConfiguration();
+        $types = $referencesConfiguration['types'];
+
+        return $types[$type]['service'];
     }
 }
