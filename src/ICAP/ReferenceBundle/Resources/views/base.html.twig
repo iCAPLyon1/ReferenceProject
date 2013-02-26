@@ -1,0 +1,28 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+  <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='http://spiralconnect.univ-lyon1.fr/webapp/css/common/spiral-buttons.css' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="{{ asset('bundles/icapreference/css/styles.css') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script src="{{ asset('bundles/icapreference/js/script.js') }}"></script>
+{% endblock %}
+
+{% block title %}Reference Bank{% endblock %}
+
+{% block body %}
+
+  <div class="header">
+    <div class="title">References bank</div>
+  </div>
+  <div class="toolbar">
+    {% block toolbar %}
+    {% endblock %}
+  </div>
+
+    {% block content %}
+    {% endblock %}
+{% endblock %}

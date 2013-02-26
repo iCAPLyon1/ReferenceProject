@@ -1,0 +1,27 @@
+{% extends "ICAPReferenceBundle::base.html.twig" %}
+
+    {% block toolbar %}
+    	<input type="button" class="spiral-button grey" id="back_button" value="&laquo; Back to list" />
+    	<input type="button" class="spiral-button blue" id="edit_button" value="Edit" />
+   		<input type="button" class="spiral-button red" id="delete_button" value="Delete" />
+    {% endblock %}
+
+	{% block content %}
+		<div class="reference_new">
+
+			<div class="reference_box">
+				<div style="float:left; border: #eee 1px solid;">
+					<img src="{{ asset('bundles/icapreference/images/disc.png') }}" width="120" />
+				</div>
+				<div style="float:left;padding: 10px;">
+					<span class="title">Justin Bieber</span><br/>
+					<span class="subtitle">I've just got hair on my d***</span><br/>
+					<span>1666</span> - <span>myMajorCompany</span><br />
+					<a href="#">http://thisisabigjook/justin.com</a>
+
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+
+		</div>
+	{% endblock %}

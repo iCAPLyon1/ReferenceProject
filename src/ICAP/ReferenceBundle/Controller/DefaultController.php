@@ -20,4 +20,31 @@ class DefaultController extends Controller
 
         return array('form' => $form->createView());
     }
+
+    /**
+     * @Route("/list")
+     * @Template()
+     */
+    public function listAction()
+    {
+        return array();
+    }
+
+    /**
+     * @Route("/new")
+     * @Template()
+     */
+    public function newAction()
+    {
+        return array();
+    }
+
+    /**
+     * @Route("/view")
+     * @Template()
+     */
+    public function viewAction()
+    {
+        return array();
+    }
 }
