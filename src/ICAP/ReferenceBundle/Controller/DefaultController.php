@@ -104,5 +104,28 @@ class DefaultController extends Controller
             'form' => $form->createView()
         );
     }
+
+    /**
+     * @Route("/create_type/{type}", name="icap_reference_add_custom_input")
+     * @Template("ICAPReferenceBundle:Default:newReference.html.twig")
+     */
+    public function addCustomInputAction(Request $request, $type)
+    {
+        $reference = new Reference();
+        $form = $this->get('icap_reference.form_manager')->getForm($type, $reference, 1);
+        $form->bind($request);
+        if($form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($reference);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('icap_reference_new'));
+        }
+
+        return array(
+            'type' => $type,
+            'form' => $form->createView()
+        );
+    }
 }
  
