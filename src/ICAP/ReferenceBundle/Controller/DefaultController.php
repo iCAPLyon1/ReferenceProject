@@ -34,13 +34,13 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/show/{id}" name="icap_reference_show")
+     * @Route("/show/{id}", name="icap_reference_show")
      * @Template()
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $reference = $em->getRepository('ICAPReferenceBundle:Reference')->findOne($id);
+        $reference = $em->getRepository('ICAPReferenceBundle:Reference')->findOneBy(array('id' => $id));
         return array('reference' => $reference);
     }
 
