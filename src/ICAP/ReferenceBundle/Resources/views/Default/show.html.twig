@@ -19,11 +19,17 @@
 					{% for key,value in reference.data %}
 						<span>{{ key }}: {{ value }}</span>
 					{% endfor %}
+                    {% for customField in reference.customFields %}
+                        <span>{{ customField.fieldKey }}: {{ customField.fieldValue }}</span>
+                        <form method="POST" action="{{ path('icap_reference_delete_custom_field', { 'id': customField.id }) }}">
+                            <input type="submit" value="x"/>
+                        </form>
+                    {% endfor %}
 					<a href="{{ reference.url }}">{{ reference.url }}</a>
 
 				</div>
 				<div style="clear:both;"></div>
-                <a href="{{ path('icap_reference_add_custom_field', reference.id) }}">add custom field</a>
+                <a href="{{ path('icap_reference_new_custom_field', { 'id': reference.id }) }}">add custom field</a>
 			</div>
 
 		</div>
