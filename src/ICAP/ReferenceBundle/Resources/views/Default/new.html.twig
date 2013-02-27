@@ -1,4 +1,39 @@
-<form method="POST" action="{{ path("icap_reference_choose_type") }}">
-    {{ form_widget(form) }}
-    <input type="submit" value="submit"/>
-</form>
+{% extends "ICAPReferenceBundle::base.html.twig" %}
+
+{% block content %}
+    <form name="icap_reference_choose_type" method="POST" action="{{ path("icap_reference_choose_type") }}">
+        {{ form_widget(form) }}
+        <input type="submit" value="submit"/>
+    </form>
+
+    <script type="text/javascript">
+        $('document').ready(function() {
+
+            var formContainer = $('<div class="form_container"></div>');
+            $('form[name="icap_reference_choose_type"]').after(formContainer);
+
+            $('form[name="icap_reference_choose_type"] > input[type="submit"]').hide();
+            $('#icap_referencebundle_choosereferencetype_type').on('change', function() {
+                $('form[name="icap_reference_choose_type"]').submit();
+            });
+
+            $('form[name="icap_reference_choose_type"]').on('submit', function (event) {
+                event.preventDefault();
+                var form = $(this);
+                if(form.find('select[name="icap_referencebundle_choosereferencetype[type]"]').val() != '') {
+                    $.post(form.attr('action'), form.serialize())
+                    .always(function() { 
+                        formContainer.empty();
+                    })
+                    .done(function(data) { 
+                        formContainer.append(data);
+                    });
+                } else {
+                    formContainer.empty();
+                } 
+            });
+
+            $('form[name="icap_reference_choose_type"]').submit();
+        });
+    </script>
+{% endblock %}

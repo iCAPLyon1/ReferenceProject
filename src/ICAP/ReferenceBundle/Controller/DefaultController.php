@@ -44,7 +44,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/choose_type", name="icap_reference_choose_type")
-     * @Template("ICAPReferenceBundle:Default:index.html.twig")
+     * @Template("ICAPReferenceBundle:Default:new.html.twig")
      */
     public function chooseTypeAction(Request $request)
     {
@@ -56,14 +56,26 @@ class DefaultController extends Controller
             $type = $data['type'];
             $url = $data['url'];
 
+            if(!$type) {
+                throw $this->createNotFoundException();
+            }
+
             $reference = new Reference();
             $reference->setType($type);
             $reference->setUrl($url);
             $form = $this->get('icap_reference.form_manager')->getForm($type, $reference);
+            $viewForm = $form->createView();
+
+            if($request->isXMLHttpRequest()) {
+                return $this->render('ICAPReferenceBundle:Default:newReferenceForm.html.twig', array(
+                    'type' => $type,
+                    'form' => $viewForm
+                ));
+            }
 
             return $this->render('ICAPReferenceBundle:Default:newReference.html.twig', array(
                 'type' => $type,
-                'form' => $form->createView()
+                'form' => $viewForm
             ));
         }
 

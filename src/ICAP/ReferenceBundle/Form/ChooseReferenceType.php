@@ -43,7 +43,8 @@ class ChooseReferenceType extends AbstractType
             ->add('type', 'choice', array(
                 'choices' => $this->getReferenceTypes(),
                 'preferred_choices' => array('default'),
-                'empty_value' => false
+                'empty_value' => 'choose a type',
+                'empty_data' => null
             ))
         ;
     }
