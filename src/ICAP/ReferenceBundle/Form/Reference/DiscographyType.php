@@ -10,7 +10,7 @@ class DiscographyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('year', 'integer')
+            ->add('year', 'integer', array('data' => date('Y')))
             ->add('language')
             ->add('artist')
             ->add('composer')

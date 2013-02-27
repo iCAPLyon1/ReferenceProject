@@ -2,7 +2,7 @@
 
 {% block toolbar %}
 	<a href="#" class="btn btn-success"><i class="icon-ok icon-white"></i> Save</a>
-	<a href="#" class="btn" id="cancel_button"><i class="icon-remove"></i> Cancel</a>
+	<a href="{{ path('icap_reference_list') }}" class="btn"><i class="icon-remove"></i> Cancel</a>
 {% endblock %}
 
 {% block content %}
@@ -15,7 +15,22 @@
 			<div style="float:left;padding: 10px;">
 	
 
-			<form name="icap_reference_choose_type" method="POST" action="{{ path("icap_reference_choose_type") }}">
+			<form name="icap_reference_choose_type" method="POST" class="form-horizontal" action="{{ path("icap_reference_choose_type") }}">
+                  <div class="control-group">
+                  	{{ form_label(form.url, null,  {'label_attr': {'class': 'control-label'}}) }}
+				    <div class="controls">
+				    	{{ form_errors(form.url) }}
+				    	{{ form_widget(form.url) }}
+				    </div>
+				  </div>
+				  <div class="control-group">
+                  	{{ form_label(form.type, null,  {'label_attr': {'class': 'control-label'}}) }}
+				    <div class="controls">
+				    	{{ form_errors(form.type) }}
+				    	{{ form_widget(form.type) }}
+				    </div>
+				  </div>
+
                 {{ form_widget(form) }}
                 <input type="submit" value="submit"/>
             </form>

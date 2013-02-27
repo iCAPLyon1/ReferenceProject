@@ -38,15 +38,17 @@
 	.reference_list {
 		padding:30px;
 	}
+		.reference_list .reference_box { background-color: transparent;margin-bottom: 10px; width:800px;}
+		.reference_list .reference_box:hover { background-color: #efefef;}
 
 	.reference_new {
 		padding:30px;
 	}
-	.reference_box { background-color: transparent;margin-bottom: 10px; width:50%;}
-	.reference_box:hover { background-color: #efefef;}
+		.reference_new .reference_box { background-color: #F5F6FA;margin-bottom: 10px; width:800px;}
 
-	.reference_list .title {  }
-	.reference_list .subtitle { font-size: 13pt; color: #666; }
+
+	.reference_box .description { font-size: 13pt; color: #666; }
+	.reference_box .title { font-size: 18pt; }
 	.reference_box .reference_link {color: #76AC0B;font-size: 10pt;}
 	.reference_box .reference_title {font-size: 18pt;color: black;text-decoration: none;}
 	.reference_box .reference_title:hover {color: blue;text-decoration: underline;}
