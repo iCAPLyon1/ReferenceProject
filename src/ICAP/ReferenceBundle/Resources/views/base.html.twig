@@ -6,8 +6,11 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('bundles/icapreference/css/styles.css') }}"/>
 {% endblock %}
 
-{% block javascripts %}
+{% block javascripts_top %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+{% endblock %}
+
+{% block javascripts_bottom %}
   <script src="{{ asset('bundles/icapreference/js/script.js') }}"></script>
 {% endblock %}
 
