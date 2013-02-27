@@ -1,9 +1,9 @@
 {% extends "ICAPReferenceBundle::base.html.twig" %}
 
     {% block toolbar %}
-    	<input type="button" class="spiral-button grey" id="back_button" value="&laquo; Back to list" />
-    	<input type="button" class="spiral-button blue" id="edit_button" value="Edit" />
-   		<input type="button" class="spiral-button red" id="delete_button" value="Delete" />
+    	<a href="{{ path('icap_reference_list') }}" class="spiral-button grey">&laquo; Back to list</a>
+    	<a href="#" class="spiral-button blue">Edit</a>
+    	<a href="#" class="spiral-button red">Delete</a>
     {% endblock %}
 
 	{% block content %}
