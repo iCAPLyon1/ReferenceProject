@@ -31,6 +31,7 @@ class DefaultController extends Controller
      */
     public function listAction()
     {
+        $em = $this->getDoctrine()->getEntityManager();
         $references = $em->getRepository('ICAPReferenceBundle:Reference')->findAll();
         return array('references' => $references);
     }
