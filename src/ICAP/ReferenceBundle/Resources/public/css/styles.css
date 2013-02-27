@@ -36,9 +36,12 @@
 
 	.reference_list {
 		padding:30px;
-		width:50%;
 	}
-	.reference_box { background-color: transparent;margin-bottom: 10px;}
+
+	.reference_new {
+		padding:30px;
+	}
+	.reference_box { background-color: transparent;margin-bottom: 10px; width:50%;}
 	.reference_box:hover { background-color: #efefef;}
 
 	.reference_list .title {  }
