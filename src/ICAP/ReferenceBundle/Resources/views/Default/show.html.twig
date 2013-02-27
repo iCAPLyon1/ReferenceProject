@@ -20,26 +20,7 @@
                     <span class="title">{{ reference.title }}</span><br/>
                     <span class="description">{{ reference.description }}</span><br/>
                     <a class="reference_link" href="{{ reference.url }}">{{ reference.url }}</a>
-                    <table class="table" style="margin-top:15px;">
-                        <tbody>
-                        {% for key,value in reference.data %}
-                            <tr>
-                                <td>{{ key }}</td>
-                                <td>
-                                    {{ value|join('/') }}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-
-                    {% for customField in reference.customFields %}
-                        <span>{{ customField.fieldKey }}: {{ customField.fieldValue }}</span>
-                        <form method="POST" action="{{ path('icap_reference_delete_custom_field', { 'id': customField.id }) }}">
-                            <input type="submit" value="x"/>
-                        </form>
-                    {% endfor %}
-
+                    {% include "ICAPReferenceBundle:Default:dataReference.html.twig" with { "reference": reference } %}
                 </div>
                 <div style="clear:both;"></div>
                 <a href="{{ path('icap_reference_new_custom_field', { 'id': reference.id }) }}">add custom field</a>

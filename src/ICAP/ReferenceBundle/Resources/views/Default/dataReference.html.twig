@@ -1,0 +1,18 @@
+<table class="table" style="margin-top:15px;">
+    <tbody>
+    {% for key,value in reference.data %}
+        <tr>
+            <td style="font-weight:bold;">{{ key }}</td>
+            <td>
+                {{ value|join('/') }}
+            </td>
+        </tr>
+    {% endfor %}
+    {% for customField in reference.customFields %}
+        <tr>
+            <td style="font-weight:bold;">{{ customField.fieldKey }}</td>
+            <td>{{ customField.fieldValue }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

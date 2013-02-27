@@ -46,12 +46,33 @@
 	}
 		.reference_new .reference_box { background-color: #F5F6FA;margin-bottom: 10px; width:800px;}
 
-
+    .reference_box { clear:both; position: relative; }
 	.reference_box .description { font-size: 13pt; color: #666; }
 	.reference_box .title { font-size: 18pt; }
 	.reference_box .reference_link {color: #76AC0B;font-size: 10pt;}
 	.reference_box .reference_title {font-size: 18pt;color: black;text-decoration: none;}
 	.reference_box .reference_title:hover {color: blue;text-decoration: underline;}
+	.reference_box .more_info { font-size: 9pt; color: #CCC; cursor: pointer; width: 200px; }
+	.reference_box .reference_popup_info { 
+		position: absolute; 
+		left: 230px; 
+		top: 80px; 
+		padding: 4px;
+		visibility: hidden; 
+		z-index: 99999;
+		opacity: 0; 
+		background-color: #efefef;
+		transition: 0.6s;
+		-webkit-transition: 0.6s;
+		-moz-transition: 0.6s;
+  		-webkit-box-shadow: 4px 4px 10px rgba(50, 50, 50, 0.4);
+		-moz-box-shadow:    4px 4px 10px rgba(50, 50, 50, 0.4);
+		box-shadow:         4px 4px 10px rgba(50, 50, 50, 0.4);
+		border:0px solid;
+		border-radius:6px;
+	}
+	.reference_box .more_info:hover + .reference_popup_info { visibility: visible; opacity: 1; }
+
 
 
 
