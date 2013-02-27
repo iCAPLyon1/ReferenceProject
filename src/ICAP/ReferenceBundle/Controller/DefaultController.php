@@ -34,10 +34,10 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/view")
+     * @Route("/show")
      * @Template()
      */
-    public function viewAction()
+    public function showAction()
     {
         return array();
     }
