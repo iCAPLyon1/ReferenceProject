@@ -98,7 +98,7 @@ class DefaultController extends Controller
             $em->persist($reference);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('icap_reference_new'));
+            return $this->redirect($this->generateUrl('icap_reference_show', $reference->getId()));
         }
 
         return array(
