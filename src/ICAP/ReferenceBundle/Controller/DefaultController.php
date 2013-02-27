@@ -6,8 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use ICAP\ReferenceBundle\Form\ReferenceType;
 use ICAP\ReferenceBundle\Entity\Reference;
+use ICAP\ReferenceBundle\Entity\CustomField;
 
 class DefaultController extends Controller
 {
@@ -29,7 +31,7 @@ class DefaultController extends Controller
      */
     public function listAction()
     {
-        $references = $this->container->get('icap_reference.manager')->getReferenceList();
+        $references = $em->getRepository('ICAPReferenceBundle:Reference')->findAll();
         return array('references' => $references);
     }
 
@@ -41,6 +43,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
         $reference = $em->getRepository('ICAPReferenceBundle:Reference')->findOneBy(array('id' => $id));
+
         return array('reference' => $reference);
     }
 
@@ -98,7 +101,7 @@ class DefaultController extends Controller
             $em->persist($reference);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('icap_reference_new'));
+            return $this->redirect($this->generateUrl('icap_reference_show', array('id' => $reference->getId())));
         }
 
         return array(
@@ -108,21 +111,72 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/add_custom_field/{id}", name="icap_reference_add_custom_field")
+     * @Route("/new_custom_field/{id}", name="icap_reference_new_custom_field")
      * @Template()
      */
-    public function addCustomFieldAction(Request $request, $id)
+    public function newCustomFieldAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
-        $reference = $em->getRepository('ICAPReferenceBundle:Reference')->findOne($id);
-
-        $form = $this->get('icap_reference.form_manager')->getCustomForm($reference);
-        $form->bind($request);
+        $form = $this->get('icap_reference.form_manager')->getCustomForm(new CustomField());
 
         return array(
-            'type' => $type,
+            'id' => $id,
             'form' => $form->createView()
         );
+    }
+
+    /**
+     * @Route("/create_custom_field/{id}", name="icap_reference_create_custom_field")
+     * @Template("ICAPReferenceBundle:Default:newCustomField.html.twig")
+     */
+    public function createCustomFieldAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $reference = $em->getRepository('ICAPReferenceBundle:Reference')->findOneBy(array('id' => $id ));
+        if(!$reference) {
+            throw $this->createNotFoundException('The reference does not exist');
+        }
+
+        $customField = new CustomField();
+        $form = $this->get('icap_reference.form_manager')->getCustomForm($customField);
+        $form->bind($request);
+
+        if($form->isValid()) {
+            $customField->setReference($reference);
+            $em->persist($customField);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('icap_reference_show', array('id' => $reference->getId())));
+        }
+
+        return array(
+            'id' => $id,
+            'form' => $form->createView()
+        );
+    }
+
+    /**
+     * Delete a Custom field.
+     *
+     * @Route("/delete_custom_field/{id}", name="icap_reference_delete_custom_field")
+     * @Method("POST")
+     */
+    public function deleteCustomFieldAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $customField = $em->getRepository('ICAPReferenceBundle:CustomField')->find($id);
+        if(!$customField) {
+            throw $this->createNotFoundException('The customField does not exist');
+        }
+
+        $referenceId = $customField->getReference()->getId();
+        if (!$customField) {
+            throw $this->createNotFoundException('Unable to find CustomField customField.');
+        }
+
+        $em->remove($customField);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('icap_reference_show', array('id' => $referenceId)));
     }
 }
  

@@ -3,6 +3,7 @@
 namespace ICAP\ReferenceBundle\Service;
 
 use ICAP\ReferenceBundle\Form\Reference\ReferenceType;
+use ICAP\ReferenceBundle\Form\Reference\CustomFieldType;
 
 class FormManager
 {
@@ -28,12 +29,22 @@ class FormManager
         return $this->getContainer()->getParameter('referencesConfiguration');
     }
 
-    public function getForm($type, $reference = null)
+    public function getForm($type, $reference = null, $customFields=0)
     {
         return $this->getFormFactory()->create(
             new ReferenceType(),
             $reference,
-            array('dataType' => $this->getServiceName($type))
+            array(
+                'dataType' => $this->getServiceName($type)
+            )
+        ); 
+    }
+
+    public function getCustomForm($customField = null)
+    {
+        return $this->getFormFactory()->create(
+            new CustomFieldType(),
+            $customField
         ); 
     }
 

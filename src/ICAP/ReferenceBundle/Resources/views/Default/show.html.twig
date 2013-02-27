@@ -1,41 +1,49 @@
 {% extends "ICAPReferenceBundle::base.html.twig" %}
 
     {% block toolbar %}
-    	<a href="{{ path('icap_reference_list') }}" class="btn"><i class="icon-chevron-left"></i> Back to list</a>
-    	<a href="#" class="btn btn-primary"><i class="icon-edit icon-white"></i> Edit</a>
-    	<a href="#" class="btn btn-danger"><i class="icon-trash icon-white"></i> Delete</a>
+        <a href="{{ path('icap_reference_list') }}" class="btn"><i class="icon-chevron-left"></i> Back to list</a>
+        <a href="#" class="btn btn-primary"><i class="icon-edit icon-white"></i> Edit</a>
+        <a href="#" class="btn btn-danger"><i class="icon-trash icon-white"></i> Delete</a>
     {% endblock %}
 
-	{% block content %}
-		<div class="reference_new">
+    {% block content %}
+        <div class="reference_new">
 
-			<div class="reference_box">
-				<div style="float:left;">
-					<div style="border: #eee 1px solid;">
-						<img src="{{ asset('bundles/icapreference/images/disc.png') }}" width="120" />
-					</div>
-					<div style="width:100%;text-align:center;font-size:8pt;">{{ reference.type }}</div>
-				</div>
-				<div style="float:left;padding: 10px;width:600px;">
-					<span class="title">{{ reference.title }}</span><br/>
-					<span class="description">{{ reference.description }}</span><br/>
-					<a class="reference_link" href="{{ reference.url }}">{{ reference.url }}</a>
-					<table class="table" style="margin-top:15px;">
-						<tbody>
-						{% for key,value in reference.data %}
-							<tr>
-								<td>{{ key }}</td>
-								<td>
-									{{ value|join('/') }}
-								</td>
-							</tr>
-						{% endfor %}
-						</tbody>
-					</table>
+            <div class="reference_box">
+                <div style="float:left;">
+                    <div style="border: #eee 1px solid;">
+                        <img src="{{ asset('bundles/icapreference/images/disc.png') }}" width="120" />
+                    </div>
+                    <div style="width:100%;text-align:center;font-size:8pt;">{{ reference.type }}</div>
+                </div>
+                <div style="float:left;padding: 10px;width:600px;">
+                    <span class="title">{{ reference.title }}</span><br/>
+                    <span class="description">{{ reference.description }}</span><br/>
+                    <a class="reference_link" href="{{ reference.url }}">{{ reference.url }}</a>
+                    <table class="table" style="margin-top:15px;">
+                        <tbody>
+                        {% for key,value in reference.data %}
+                            <tr>
+                                <td>{{ key }}</td>
+                                <td>
+                                    {{ value|join('/') }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
 
-				</div>
-				<div style="clear:both;"></div>
-			</div>
+                    {% for customField in reference.customFields %}
+                        <span>{{ customField.fieldKey }}: {{ customField.fieldValue }}</span>
+                        <form method="POST" action="{{ path('icap_reference_delete_custom_field', { 'id': customField.id }) }}">
+                            <input type="submit" value="x"/>
+                        </form>
+                    {% endfor %}
 
-		</div>
-	{% endblock %}
+                </div>
+                <div style="clear:both;"></div>
+                <a href="{{ path('icap_reference_new_custom_field', { 'id': reference.id }) }}">add custom field</a>
+            </div>
+
+        </div>
+    {% endblock %}

@@ -43,6 +43,19 @@ class Reference
     protected $data;
 
     /**
+     * @ORM\OneToMany(targetEntity="ICAP\ReferenceBundle\Entity\CustomField", mappedBy="reference", cascade={"persist"})
+     */
+    protected $customFields;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->customFields = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return integer 
@@ -165,5 +178,38 @@ class Reference
     public function getData()
     {
         return $this->data;
+    }
+    
+    /**
+     * Add customFields
+     *
+     * @param \ICAP\ReferenceBundle\Entity\CustomField $customField
+     * @return Reference
+     */
+    public function addCustomField(\ICAP\ReferenceBundle\Entity\CustomField $customField)
+    {
+        $this->customFields[] = $customField;
+    
+        return $this;
+    }
+
+    /**
+     * Remove customFields
+     *
+     * @param \ICAP\ReferenceBundle\Entity\CustomField $customField
+     */
+    public function removeCustomField(\ICAP\ReferenceBundle\Entity\CustomField $customField)
+    {
+        $this->customFields->removeElement($customField);
+    }
+
+    /**
+     * Get customFields
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCustomFields()
+    {
+        return $this->customFields;
     }
 }
