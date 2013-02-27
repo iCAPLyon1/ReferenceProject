@@ -34,12 +34,14 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/show")
+     * @Route("/show/{id}" name="icap_reference_show")
      * @Template()
      */
-    public function showAction()
+    public function showAction($id)
     {
-        return array();
+        $em = $this->getDoctrine()->getEntityManager();
+        $reference = $em->getRepository('ICAPReferenceBundle:Reference')->findOne($id);
+        return array('reference' => $reference);
     }
 
     /**
@@ -106,21 +108,16 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/create_type/{type}", name="icap_reference_add_custom_input")
-     * @Template("ICAPReferenceBundle:Default:newReference.html.twig")
+     * @Route("/add_custom_field/{id}", name="icap_reference_add_custom_field")
+     * @Template()
      */
-    public function addCustomInputAction(Request $request, $type)
+    public function addCustomFieldAction(Request $request, $id)
     {
-        $reference = new Reference();
-        $form = $this->get('icap_reference.form_manager')->getForm($type, $reference, 1);
-        $form->bind($request);
-        if($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($reference);
-            $em->flush();
+        $em = $this->getDoctrine()->getEntityManager();
+        $reference = $em->getRepository('ICAPReferenceBundle:Reference')->findOne($id);
 
-            return $this->redirect($this->generateUrl('icap_reference_new'));
-        }
+        $form = $this->get('icap_reference.form_manager')->getCustomForm($reference);
+        $form->bind($request);
 
         return array(
             'type' => $type,
